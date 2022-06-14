@@ -32,6 +32,6 @@ let nums2 = [2, 3];
 let nums3 = [0, 17, 18, 19];
 let nums4 = [-3, 0, 17, 18, 19];
 
-console.log(merge(nums1, nums2), findMedianSortedArrays(nums1, nums2))
-console.log(merge(nums1, nums3), findMedianSortedArrays(nums1, nums3))
-console.log(merge(nums1, nums4), findMedianSortedArrays(nums1, nums4))
+console.log(merge(nums1, nums2), findMedianSortedArrays(nums1, nums2)) // 2.5
+console.log(merge(nums1, nums3), findMedianSortedArrays(nums1, nums3)) // 10.5
+console.log(merge(nums1, nums4), findMedianSortedArrays(nums1, nums4)) // 4
