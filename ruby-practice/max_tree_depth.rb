@@ -1,5 +1,5 @@
 def max_depth(root)
-    if !root then return 0 end
+    return 0 unless root
     ldepth = 0
     rdepth = 0
     if root.left then ldepth = max_depth(root.left) end
