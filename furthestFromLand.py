@@ -12,6 +12,7 @@ land = [
     ]
 
 def maxDistance(grid) -> int:
+    from collections import deque
     visited=set()
     def neighbors(tup):
         res = []
@@ -24,7 +25,7 @@ def maxDistance(grid) -> int:
         if tup[1] < len(grid[0])-1:
             res.append((tup[0],tup[1]+1))
         return [tupl for tupl in res if tupl not in visited]
-    queue = []
+    queue = deque()
     none = True
     for row in range(len(grid)):
         for col in range(len(grid[row])):
@@ -40,7 +41,7 @@ def maxDistance(grid) -> int:
         # print(depth, queue)
         width = len(queue)
         for i in range(width):
-            curr = queue.pop(0)
+            curr = queue.popleft()
             if curr not in visited:
                 visited.add(curr)
                 queue.extend(neighbors(curr))
