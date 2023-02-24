@@ -1,5 +1,5 @@
 class Heap:
-    def __init__(self, it, key=lambda x,y: x <= y):
+    def __init__(self, it, key=lambda x,y: x < y):
         self.comparitor = key
         self.lst = []
         for el in it:
@@ -13,12 +13,16 @@ class Heap:
             self.lst[i] = self.lst[(i-1)//2]
             i = (i-1)//2
         self.lst[i] = el
-    def poll(self):
+    def poll(self, pos=0):
         last = self.lst.pop()
-        first = self.lst[0]
-        i = 0
+        if len(self.lst) == pos: return last
+        first = self.lst[pos]
+        i = pos
         # while ith has children, move 'better' child up
         while 2*i+1 < len(self.lst):
+            if len(self.lst) > 2*i+1 and self.comparitor(last,self.lst[2*i+1]):
+                if len(self.lst) == 2*i+2 or self.comparitor(last,self.lst[2*i+2]):
+                    break
             if len(self.lst) > 2*i + 2 and self.comparitor(self.lst[2*i+2],self.lst[2*i+1]):
                 self.lst[i] = self.lst[2*i+2]
                 i = 2*i + 2
@@ -28,6 +32,11 @@ class Heap:
         # once ith has no children, replace it with last
         self.lst[i] = last
         return first
+    def search_and_pop(self, condition):
+        for i in range(len(self.lst)):
+            if condition(self.lst[i]):
+                return self.poll(pos=i)
+        return None
     def visualize(self,msg):
         from math import floor, log2
         print(msg)
@@ -53,5 +62,9 @@ xHeap.push(10)
 xHeap.push(4)
 xHeap.push(4)
 # xHeap.visualize('x')
-print(xHeap)
+# print(xHeap)
+print(yHeap)
+print(yHeap.search_and_pop(lambda el: el == 7))
+print(yHeap)
+yHeap.poll(1)
 print(yHeap)
