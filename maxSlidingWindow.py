@@ -12,6 +12,7 @@ class Solution(object):
         res = [0]*(len(nums)-k+1)
         count = defaultdict(lambda: 0)
 
+        print(res,heap)
         for i in range(len(res)):
             # progress right of window
             heapq.heappush(heap,-nums[i+k-1])
@@ -22,10 +23,11 @@ class Solution(object):
             count[nums[i]] += 1
 
             # pop from heap until top remains in count
-            while count[-heap[0]] > 0:
+            while len(heap) > 0 and count[-heap[0]] > 0:
                 count[-heap[0]] -= 1
                 heapq.heappop(heap)
         return res
 
 nums=[1,3,-1,-3,5,3,6,7]
-print('result', Solution.maxSlidingWindow(nums,3))
+# print('result', Solution.maxSlidingWindow(nums,3))
+print('result', Solution.maxSlidingWindow([1],1))
