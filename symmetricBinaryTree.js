@@ -25,3 +25,18 @@ var isSymmetric = function (root) {
     }
     return true
 };
+
+// Recursive solution with 'is mirror' check
+var isSymmetric2 = function(root) {
+    if (!root) return True
+    return isMirror(root.left,root.right)
+
+    function isMirror(l, r) {
+        if (!l || !r) {
+            return !l && !r
+        }
+        if (l.val !== r.val) return false
+
+        return isMirror(l.left,r.right) && isMirror(l.right,r.left)
+    }
+};
