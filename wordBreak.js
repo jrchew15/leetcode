@@ -17,37 +17,19 @@ function makeTrie(dict) {
 
 function wordBreak(s, wordDict) {
     const trie = makeTrie(wordDict);
-    // let node = trie;
-    // let q = [node];
+    let visited = new Set();
+    let q = [0];
 
-    function _wordBreak(idx) {
-        if (idx >= s.length) return true;
-        let node = trie;
-        for (let i = idx; i < s.length; i++) {
-            node = node[s[i]]
-            if (!node) return false;
-            if (node.word && _wordBreak(i + 1)) return true;
+    while (q.length) {
+        let curr = trie;
+        let i = q.pop();
+        visited.add(i)
+        while (curr[s[i]]) {
+            if (curr[s[i]].word && !visited.has(i+1)) q.push(i+1)
+            curr = curr[s[i]];
+            i++;
         }
-        return !!node.word
+        if (i === s.length && curr.word) return true;
     }
-    return _wordBreak(0)
-
-    // for (let i = 0; i < s.length; i++) {
-    //     let char = s[i];
-    //     let temp = [];
-    //     for (let curr of q) {
-    //         if (curr[char]) {
-    //             temp.push(curr[char])
-    //             if (curr[char].word) temp.push(trie)
-    //         }
-    //     }
-    //     q = temp
-    // }
-    // return q.length > 0 && q.some(x => x.word)
+    return false;
 };
-
-let x = makeTrie(['leet', 'code', 'leaf', 'leetcode'])
-console.log(x.l.e)
-console.log(wordBreak('leetcode', ['leet', 'cod', 'leaf']))
-console.log(wordBreak('catdog', ['cat', 'cats', 'dog', 'doggie', 'mouse']))
-console.log(wordBreak('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',['a','aa','aaaaaaaaaaa']))
