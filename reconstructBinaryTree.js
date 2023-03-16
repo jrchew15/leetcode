@@ -16,7 +16,7 @@ var buildTree = function (inorder, postorder) {
     while (i < inorder.length) {
         j = postorder.indexOf(inorder[i]);
         // console.log(i, j)
-        curr = new TreeNode(inorder[i], curr, buildTree(inorder.slice(i+1, j), postorder.slice(i, j+1)));
+        curr = new TreeNode(inorder[i], curr, buildTree(inorder.slice(i+1, j+1), postorder.slice(i, j)));
         i = j+1
         j++
     }
