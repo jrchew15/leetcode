@@ -5,7 +5,7 @@ interface TrieNodeInterface {
 
 class TrieNode implements TrieNodeInterface {
     endsWord = false;
-    children = {};
+    children: { [char: string]: TrieNode } = {};
     constructor() { }
 }
 
@@ -24,7 +24,7 @@ class Trie implements TrieInterface {
         let node: TrieNode = this.root;
         for (let i = 0; i < word.length; i++) {
             let char: string = word[i];
-            if (node.children[char] === undefined) node.children[char] = new TrieNode()
+            if (!node.children[char]) node.children[char] = new TrieNode()
 
             node = node.children[char]
         }
@@ -64,3 +64,4 @@ class Trie implements TrieInterface {
 
 const myTrie = new Trie();
 myTrie.insert('apple')
+console.log(myTrie.root)
