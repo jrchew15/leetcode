@@ -15,7 +15,8 @@ interface TrieInterface {
 
 class Trie implements TrieInterface {
     root = new TrieNode();
-    constructor(words: string[]) {
+    constructor(words?: string[]) {
+        if (!words) return
         for (let word of words) this.insert(word)
     }
 
@@ -35,8 +36,8 @@ class Trie implements TrieInterface {
         for (let i = 0; i < word.length; i++) {
             let char: string = word[i];
 
-            if (!node[char]) return false;
-            node = node[char];
+            if (!node.children[char]) return false;
+            node = node.children[char];
         }
         return node.endsWord;
     }
@@ -46,8 +47,8 @@ class Trie implements TrieInterface {
         for (let i = 0; i < prefix.length; i++) {
             let char: string = prefix[i];
 
-            if (!node[char]) return false;
-            node = node[char];
+            if (!node.children[char]) return false;
+            node = node.children[char];
         }
         return true;
     }
@@ -60,3 +61,6 @@ class Trie implements TrieInterface {
  * var param_2 = obj.search(word)
  * var param_3 = obj.startsWith(prefix)
  */
+
+const myTrie = new Trie();
+myTrie.insert('apple')
