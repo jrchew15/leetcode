@@ -14,10 +14,11 @@ var buildTree = function (inorder, postorder) {
     let j = 0;
     let curr = null;
     while (i < inorder.length) {
-        j = postorder.indexOf(inorder[i]) + 1;
-        console.log(i, j)
-        curr = new TreeNode(inorder[i], curr, buildTree(inorder.slice(i, j), postorder.slice(i, j)));
-        i = j
+        j = postorder.indexOf(inorder[i]);
+        // console.log(i, j)
+        curr = new TreeNode(inorder[i], curr, buildTree(inorder.slice(i+1, j), postorder.slice(i, j+1)));
+        i = j+1
+        j++
     }
     return curr
 };
