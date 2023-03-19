@@ -15,3 +15,4 @@ def distinctNames(ideas) -> int:
                 diff = len(dct[firsts[i]].intersection(dct[firsts[j]]))
                 count += 2 * (len(dct[firsts[i]])-diff) * (len(dct[firsts[j]])-diff)
         return count
+
