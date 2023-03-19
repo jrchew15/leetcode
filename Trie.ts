@@ -3,7 +3,7 @@ interface TrieNodeInterface {
     children: { [char: string]: TrieNode };
 }
 
-class TrieNode implements TrieNodeInterface {
+export class TrieNode implements TrieNodeInterface {
     endsWord = false;
     children: { [char: string]: TrieNode } = {};
     constructor() { }
@@ -13,7 +13,7 @@ interface TrieInterface {
     root: TrieNode;
 }
 
-class Trie implements TrieInterface {
+export class Trie implements TrieInterface {
     root = new TrieNode();
     constructor(words?: string[]) {
         if (!words) return
